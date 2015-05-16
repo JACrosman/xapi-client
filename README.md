@@ -1,6 +1,18 @@
 # xapi-client
 An xAPI javascript client.
 
+## Table of Contents
+* [**Description**](#description)
+* [**Installation**](#installation)
+* [**Script Usage**](#script-usage)
+    * [Activity](#activity)
+    * [Activity Profile](#activity-profile)
+    * [Actor](#actor)
+    * [Agent Profile](#agent-profile)
+    * [Backlog](#backlog)
+    * [Statement](#statement)
+    * [Statement Query](#statement-query)
+    * [Verb](#verb)
 
 ## Description
 
@@ -13,7 +25,7 @@ An xAPI javascript client.
 
 ## Script Usage
 
-Below are the many of the classes and methods defined in xapi client script, including details about use and example code blocks.
+Below are the many of the classes and methods defined in xAPI client script, including details about use and example code blocks.
 
 ### Activity
 
@@ -21,7 +33,7 @@ Below are the many of the classes and methods defined in xapi client script, inc
 
 `xapi.Activity.create()`
 
-Build a new activity for an xapi statement from the provided data.
+Build a new activity for an xAPI statement from the provided data.
 
 ```javascript
 // setup activity information
@@ -55,7 +67,7 @@ myActivity.get(callbackFn);
 
 `xapi.ActivityProfile.create()`
 
-Build a new activityProfile for an xapi statement from the provided data.
+Build a new activityProfile for an xAPI statement from the provided data.
 
 ```javascript
 // setup profile information
@@ -136,7 +148,7 @@ Actors can be `Person`s or `Agent`s.
 
 `xapi.Actor.create()`
 
-Build a new actor for an xapi statement.
+Build a new actor for an xAPI statement.
 
 ```javascript
 // setup actor information
@@ -269,12 +281,12 @@ Adds a statement or array of statements to the backlog and syncs with both the b
 
 ```javascript
 // assume myBacklog is a previously created backlog
-// assume myStatement is a previously created xapi statement
+// assume myStatement is a previously created xAPI statement
 myBacklog.add(myStatement);
 
 
 // alternativley, send a batch array of statements to the backlog at once.
-// assume manyStatemens is a collection of previously created xapi statements
+// assume manyStatemens is a collection of previously created xAPI statements
 myBacklog.add(manyStatemens);
 ```
 
@@ -282,7 +294,7 @@ myBacklog.add(manyStatemens);
 
 `xapi.Backlog.get()`
 
-Retrieves the array of xapi statements in the backlog from localStorage and sessionStroage. Returns the array of backlog items.
+Retrieves the array of xAPI statements in the backlog from localStorage and sessionStroage. Returns the array of backlog items.
 
 ```javascript
 // assume myBacklog is a previously created backlog
@@ -294,11 +306,11 @@ var myBackloggedStatements = myBacklog.get();
 
 `xapi.Backlog.syncStorage()`
 
-Sets the localStorage and sessionStorage caches contents to the provided collection of xapi statements.
+Sets the localStorage and sessionStorage caches contents to the provided collection of xAPI statements.
 
 ```javascript
 // assume myBacklog is a previously created backlog
-// assume manyStatemens is a collection of previously created xapi statements
+// assume manyStatemens is a collection of previously created xAPI statements
 myBacklog.syncStorage(manyStatemens);
 ```
 
@@ -333,13 +345,13 @@ myBacklog.send();
 
 ### Statement
 
-Statements are the objects that hold all the collected xapi data for a single activity/verb/actor combination.
+Statements are the objects that hold all the collected xAPI data for a single activity/verb/actor combination.
 
 #### Creating Statements
 
 `xapi.Statement.create()`
 
-Builds out a complete xapi statement based on the provided data.
+Builds out a complete xAPI statement based on the provided data.
 
 ```javascript
 // build out a new statement with individual statement pieces
@@ -361,10 +373,10 @@ var myStatement = xapi.State.create(statementData);
 
 `xapi.Statement.store()`
 
-Saves the xapi statment in the local `backlog` and syncronizes the local `backlog` in the browser's localStorage and sessionStorage.
+Saves the xAPI statment in the local `backlog` and syncronizes the local `backlog` in the browser's localStorage and sessionStorage.
 
 ```javascript
-// assume myStatement is previously created xapi statement
+// assume myStatement is previously created xAPI statement
 // store the statement
 myStatement.store();
 ```
@@ -377,7 +389,7 @@ An object for selecting statements from the configured `LRS`.
 
 `xapi.StatementQuery()`
 
-Builds out a statementQuery object for fetching xapi statements.
+Builds out a statementQuery object for fetching xAPI statements.
 
 ```javascript
 //setup query parameters
@@ -418,5 +430,30 @@ var options = {
     "data": dataFunction
 };
 myQuery.live(options);
+```
+
+
+### Verb
+
+An Object for creating and managing predefined xAPI verbs.
+
+#### Create Verb
+
+`xapi.Verb.create()`
+
+Builds a verb for use in an xAPI statement.
+
+```javascript
+//setup verb data
+var verbData = {
+    "id": id,
+    "display": display
+};
+
+// then build create the verb from the verbData object
+var myVerb = xapi.StatementQuery(verbData);
+
+// alternatively, build a verb from individual peices
+var myVerb = xapi.StatementQuery(id, display);
 ```
 
