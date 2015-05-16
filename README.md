@@ -1,5 +1,28 @@
 # xapi-client
-An xAPI javascript client.
+A javascript xAPI client.
+
+## Description
+The project contains a comprehensive xAPI javascript client sdk. It was developed to allow applications using javascript the capability to communicate with an LRS. It is currently compatible with xAPI Spec 1.0.2.
+
+## Features
+* Compatible with xAPI Spec 1.0.2
+* Client side validation of xAPI statement
+* Queuing of failed requests from network connectivity
+* Standalone script (No third party dependencies)
+* Support for Document APIs
+* Support for statement attachments using multipart/mixed content type
+
+## Installation
+1) Include javascript
+```javascript
+<script type="text/javascript" src="/lib/xapi.js"></script>
+```
+2) Set LRS Endpoint
+```javascript
+xapi.setLRS('http://www.rockinlrs.com');
+```
+
+All classes are stored in the xapi namespace.
 
 ## Table of Contents
 * [**Description**](#description)
@@ -13,15 +36,6 @@ An xAPI javascript client.
     * [Statement](#statement)
     * [Statement Query](#statement-query)
     * [Verb](#verb)
-
-## Description
-
-
-## Features
-
-
-## Installation
-
 
 ## Script Usage
 
@@ -456,4 +470,3 @@ var myVerb = xapi.StatementQuery(verbData);
 // alternatively, build a verb from individual peices
 var myVerb = xapi.StatementQuery(id, display);
 ```
-
