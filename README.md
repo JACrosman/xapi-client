@@ -13,6 +13,323 @@ An xAPI javascript client.
 
 ## Script Usage
 
+Below are the many of the classes and methods defined in xapi client script, including details about use and example code blocks.
+
+### Activity
+
+#### Create Activity
+
+`xapi.Activity.create()`
+
+Build a new activity for an xapi statement from the provided data.
+
+```javascript
+// setup activity information
+var activityData = {
+    "id": id,
+    "objectType": objectType,
+    "definition": definition,
+};
+
+// then create a new activity with the data
+var myActivity = new xapi.Activity.create(activityData);
+
+// alternativley, create an activity piece by piece.
+var myActivity = new xapi.Activity.create(id, objectType, definition);
+```
+
+#### Get Activity Profile from Activity
+
+`xapi.Activity.get()`
+
+Retrieves the activity's profile and sends the data to a callback.
+
+```javascript
+// assume myActivity is a previously created activity object
+myActivity.get(callbackFn);
+```
+
+### Activity Profile
+
+#### Create Activity Profile
+
+`xapi.ActivityProfile.create()`
+
+Build a new activityProfile for an xapi statement from the provided data.
+
+```javascript
+// setup profile information
+var activityProfileData = {
+    "activityId": activityId,
+    "profileId": profileId,
+    "since": email,
+    "document": id
+};
+// then create a new activityProfile with the data
+var myActivityProfile = new xapi.ActivityProfile.create(activityProfileData);
+
+// alternativley, create an actor piece by piece.
+var myActivityProfile = new xapi.ActivityProfile.create(activityId, profileId, since, document);
+```
+
+#### Get ActivityProfile
+
+`xapi.ActivityProfile.get()`
+
+Retrieve the specified profile document and feed it to the provided callback.
+
+```javascript
+// assume myActivityProfile is a previously created activity profile object
+myActivityProfile.get(callbackFn);
+```
+
+#### Get All ActivityProfiles
+
+`xapi.ActivityProfile.getAll()`
+
+Retrieve all profile id entries for the the activity profile and feed it to the provided callback.
+
+```javascript
+// assume myActivityProfile is a previously created activity profile object
+myActivityProfile.getAll(callbackFn);
+```
+
+#### Update ActivityProfile
+
+`xapi.ActivityProfile.update()`
+
+Modify a specified profile document and send resulting data to the provided callback.
+
+```javascript
+// assume myActivityProfile is a previously created activity profile object
+myActivityProfile.update(callbackFn);
+```
+
+#### Create ActivityProfile Document
+
+`xapi.ActivityProfile.post()`
+
+Creates an activity profile document for the specified profile document. Send resulting data to the provided callback.
+
+```javascript
+// assume myActivityProfile is a previously created activity profile object
+myActivityProfile.post(callbackFn);
+```
+
+#### Remove ActivityProfile Documents
+
+`xapi.ActivityProfile.remove()`
+
+Deletes the profile doument for the specified activity profile. Send resulting data to the provided callback.
+
+```javascript
+// assume myActivityProfile is a previously created activity profile object
+myActivityProfile.remove(callbackFn);
+```
+
+
+### Actor
+
+Actors can be `Person`s or `Agent`s.
+
+#### Create Actor
+
+`xapi.Actor.create()`
+
+Build a new actor for an xapi statement.
+
+```javascript
+// setup actor information
+var actorData = {
+    "objectType": objectType,
+    "name": name,
+    "mbox": email,
+    "openid": id,
+    "account": account,
+    "memebers": members
+};
+// then create a new actor with the data
+var myActor = new xapi.Actor.create(actorData);
+
+// alternativley, create an actor piece by piece.
+var myActor = new xapi.Actor.create(objectType, name, mbox, openid, account, members);
+```
+
+#### Get Agent from Actor
+
+`xapi.Actor.get()`
+
+Retrieve the agent data from the given actor and feed it to the provided callback.
+
+```javascript
+// assume myActor is a previously created actor object (which is an Agent)
+// get the Actor's agent's data sent to the callbackFn
+myActor.get(callbackFn);
+```
+
+### Agent Profile
+
+#### Create an AgentProfile
+
+`xapi.AgentProfile.create()`
+
+Build a new Agent Profile.
+
+```javascript
+// create an agent profile piece by piece
+var myAgentProfile = new xapi.AgentProfile.create(agent, profileId, since, document);
+
+// alternatively, build an agentProfileData object
+var agentProfileData = {
+    "agent": agent,
+    "profileId": profileId,
+    "since": since,
+    "document": document
+};
+// then, create the profile by passing in the new object.
+var myAgentProfile = new xapi.AgentProfile.create(agentProfileData);
+```
+
+#### Get Agent Profile
+
+`xapi.AgentProfile.get()`
+
+Retrieve a profile that match the agentProfileData. Send the results to a callback function.
+
+```javascript
+// assume myAgentProfile is a previously created profile
+myAgentProfile.get(callbackFn);
+```
+
+#### Get All Agent Profiles
+
+`xapi.AgentProfile.getAll()`
+
+Retrieve all agent profiles and that match the agentProfileData. Send the results to a callback function.
+
+```javascript
+// assume myAgentProfile is a previously created profile
+myAgentProfile.getAll(callbackFn);
+```
+
+#### Update Agent Profile
+
+`xapi.AgentProfile.update()`
+
+Modifies a profile that match the agentProfileData. Send the results to a callback function.
+
+```javascript
+// assume myAgentProfile is a previously created profile
+myAgentProfile.update(callbackFn);
+```
+
+#### Add Agents Profile
+
+`xapi.AgentProfile.post()`
+
+Adds the specified profile to the agent. Send the results to a callback function.
+
+```javascript
+// assume myAgentProfile is a previously created profile
+myAgentProfile.post(callbackFn);
+```
+
+#### Remove Agents Profile
+
+`xapi.AgentProfile.remove()`
+
+Removes an agent's stored profile.
+
+```javascript
+// assume myAgentProfile is a previously created profile
+myAgentProfile.remove(callbackFn);
+```
+
+
+### Backlog
+
+Storage mechanism for holding and managing statements until able to send to the configured `LRS`.
+
+#### Create Backlog
+
+`xapi.Backlog()`
+
+Builds a new statement backlog.
+
+```javascript
+// create a new, empty backlog with the given string as a name
+var myBacklog = xapi.Backlog('name');
+```
+
+#### Add to Backlog
+
+`xapi.Backlog.add()`
+
+Adds a statement or array of statements to the backlog and syncs with both the browser's LocalStorage and SessionStorage.
+
+```javascript
+// assume myBacklog is a previously created backlog
+// assume myStatement is a previously created xapi statement
+myBacklog.add(myStatement);
+
+
+// alternativley, send a batch array of statements to the backlog at once.
+// assume manyStatemens is a collection of previously created xapi statements
+myBacklog.add(manyStatemens);
+```
+
+#### Get Backlog
+
+`xapi.Backlog.get()`
+
+Retrieves the array of xapi statements in the backlog from localStorage and sessionStroage. Returns the array of backlog items.
+
+```javascript
+// assume myBacklog is a previously created backlog
+var myBackloggedStatements = myBacklog.get();
+```
+
+
+#### Syncronize Backlog Storage
+
+`xapi.Backlog.syncStorage()`
+
+Sets the localStorage and sessionStorage caches contents to the provided collection of xapi statements.
+
+```javascript
+// assume myBacklog is a previously created backlog
+// assume manyStatemens is a collection of previously created xapi statements
+myBacklog.syncStorage(manyStatemens);
+```
+
+#### Empty Backlog Stroage
+
+`xapi.Backlog.empty()`
+
+Clears out the backlog completely.
+
+```javascript
+// assume myBacklog is a previously created backlog
+myBacklog.empty();
+```
+
+#### Send Statement from Backlog
+
+`xapi.Backlog.send()`
+
+Sends current statements in the backlog to the configured `LRS` endpoint.
+
+```javascript
+// assume myBacklog is a previously created backlog
+myBacklog.send();
+```
+
+    ### Document
+
+    #### Creating Documents
+
+    `xapi.Document.create()`
+
 
 ### Statement
 
@@ -25,19 +342,19 @@ Statements are the objects that hold all the collected xapi data for a single ac
 Builds out a complete xapi statement based on the provided data.
 
 ```javascript
-    // build out a new statement with individual statement pieces
-    var myStatement = xapi.State.create(activityId, agent, registration, stateId, since, document);
+// build out a new statement with individual statement pieces
+var myStatement = xapi.State.create(activityId, agent, registration, stateId, since, document);
 
-    // alternatively, build out an object containing all necessary data then call create with the aggregate object
-    var statementData = {
-        "activityId": activityId,
-        "agent": agent,
-        "registration": registration,
-        "stateId": stateId,
-        "since": since,
-        "document": document
-    };
-    var myStatement = xapi.State.create(statementData);
+// alternatively, build out an object containing all necessary data then call create with the aggregate object
+var statementData = {
+    "activityId": activityId,
+    "agent": agent,
+    "registration": registration,
+    "stateId": stateId,
+    "since": since,
+    "document": document
+};
+var myStatement = xapi.State.create(statementData);
 ```
 
 #### Storing Statements
@@ -47,9 +364,9 @@ Builds out a complete xapi statement based on the provided data.
 Saves the xapi statment in the local `backlog` and syncronizes the local `backlog` in the browser's localStorage and sessionStorage.
 
 ```javascript
-    // assume myStatement is previously created xapi statement
-    // store the statement
-    myStatement.store();
+// assume myStatement is previously created xapi statement
+// store the statement
+myStatement.store();
 ```
 
 ### Statement Query
@@ -63,14 +380,13 @@ An object for selecting statements from the configured `LRS`.
 Builds out a statementQuery object for fetching xapi statements.
 
 ```javascript
+//setup query parameters
+var queryParams = {
+    "limit": "1000"
+};
 
-    //setup query parameters
-    var queryParams = {
-        "limit": "1000"
-    };
-
-    // build out a new query with individual statement pieces
-    var myQuery = xapi.StatementQuery(queryParams);
+// build out a new query with individual statement pieces
+var myQuery = xapi.StatementQuery(queryParams);
 ```
 
 #### Query for Statements
@@ -80,9 +396,9 @@ Builds out a statementQuery object for fetching xapi statements.
 Call get to retrieve a the results of the query parameters set in the the Statement Query Object (myQuery).
 
 ```javascript
-    // assume mQuery is a previously created query object
-    // get a statement(s) data sent to the callbackFn
-    myQuery.get(callbackFn);
+// assume mQuery is a previously created query object
+// get a statement(s) data sent to the callbackFn
+myQuery.get(callbackFn);
 ```
 
 #### Setup Live Query
@@ -92,111 +408,15 @@ Call get to retrieve a the results of the query parameters set in the the Statem
 Sets up a live query.
 
 ```javascript
-
-    // assume mQuery is a previously created query object
-    // setup live query options
-    var options = {
-        "update": updateFunction,
-        "connect": connectFunction,
-        "disconnect": disconnectFunction,
-        "error": errorFunction,
-        "data": dataFunction
-    };
-    myQuery.live(options);
+// assume mQuery is a previously created query object
+// setup live query options
+var options = {
+    "update": updateFunction,
+    "connect": connectFunction,
+    "disconnect": disconnectFunction,
+    "error": errorFunction,
+    "data": dataFunction
+};
+myQuery.live(options);
 ```
 
-### Document
-
-
-#### Creating Documents
-
-
-#### Creating Documents
-
-
-### Agent
-
-
-### Agent Profile
-
-
-### Activity
-
-
-### Backlog
-
-Storage mechanism for holding and managing statements until able to send to the configured `LRS`.
-
-#### Create a Backlog
-
-`xapi.Backlog()`
-
-Builds a new statement backlog.
-
-```javascript
-    // create a new, empty backlog with the given string as a name
-    var myBacklog = xapi.Backlog('name');
-```
-
-#### Add to Backlog
-
-`xapi.Backlog.add()`
-
-Adds a statement or array of statements to the backlog and syncs with both the browser's LocalStorage and SessionStorage.
-
-```javascript
-    // assume myBacklog is a previously created backlog
-    // assume myStatement is a previously created xapi statement
-    myBacklog.add(myStatement);
-
-
-    // alternativley, sent a batch array of statements to the backlog at once.
-    // assume manyStatemens is a collection of previously created xapi statements
-    myBacklog.add(manyStatemens);
-```
-
-#### Get Backlog
-
-`xapi.Backlog.get()`
-
-Retrieves the array of xapi statements in the backlog from localStorage and sessionStroage. Returns the array of backlog items.
-
-```javascript
-    // assume myBacklog is a previously created backlog
-    var myBackloggedStatements = myBacklog.get();
-```
-
-
-#### SyncStorage
-
-`xapi.Backlog.syncStorage()`
-
-Sets the localStorage and sessionStorage caches contents to the provided collection of xapi statements.
-
-```javascript
-    // assume myBacklog is a previously created backlog
-    // assume manyStatemens is a collection of previously created xapi statements
-    myBacklog.syncStorage(manyStatemens);
-```
-
-#### Empty Backlog Stroage
-
-`xapi.Backlog.empty()`
-
-Clears out the backlog completely.
-
-```javascript
-    // assume myBacklog is a previously created backlog
-    myBacklog.empty();
-```
-
-#### Send Statement from Backlog
-
-`xapi.Backlog.send()`
-
-Sends current statements in the backlog to the configured `LRS` endpoint.
-
-```javascript
-    // assume myBacklog is a previously created backlog
-    myBacklog.send();
-```
