@@ -350,12 +350,11 @@ Sends current statements in the backlog to the configured `LRS` endpoint.
 myBacklog.send();
 ```
 
-    ### Document
+### Document
 
-    #### Creating Documents
+#### Creating Documents
 
-    `xapi.Document.create()`
-
+`xapi.Document.create()`
 
 ### Statement
 
