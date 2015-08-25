@@ -39,7 +39,7 @@ All classes are stored in the xapi namespace.
 
 ## Script Usage
 
-Below are the many of the classes and methods defined in xAPI client script, including details about use and example code blocks.
+Below are many of the classes and methods defined in xAPI client script, including details about usage and example code blocks.
 
 ### Activity
 
@@ -60,7 +60,7 @@ var activityData = {
 // then create a new activity with the data
 var myActivity = new xapi.Activity.create(activityData);
 
-// alternativley, create an activity piece by piece.
+// alternatively, create an activity piece by piece
 var myActivity = new xapi.Activity.create(id, objectType, definition);
 ```
 
@@ -94,7 +94,7 @@ var activityProfileData = {
 // then create a new activityProfile with the data
 var myActivityProfile = new xapi.ActivityProfile.create(activityProfileData);
 
-// alternativley, create an actor piece by piece.
+// alternatively, create an actor piece by piece.
 var myActivityProfile = new xapi.ActivityProfile.create(activityId, profileId, since, document);
 ```
 
@@ -146,7 +146,7 @@ myActivityProfile.post(callbackFn);
 
 `xapi.ActivityProfile.remove()`
 
-Deletes the profile doument for the specified activity profile. Send resulting data to the provided callback.
+Deletes the profile document for the specified activity profile. Send resulting data to the provided callback.
 
 ```javascript
 // assume myActivityProfile is a previously created activity profile object
@@ -172,12 +172,12 @@ var actorData = {
     "mbox": email,
     "openid": id,
     "account": account,
-    "memebers": members
+    "members": members
 };
 // then create a new actor with the data
 var myActor = new xapi.Actor.create(actorData);
 
-// alternativley, create an actor piece by piece.
+// alternatively, create an actor piece by piece.
 var myActor = new xapi.Actor.create(objectType, name, mbox, openid, account, members);
 ```
 
@@ -220,7 +220,7 @@ var myAgentProfile = new xapi.AgentProfile.create(agentProfileData);
 
 `xapi.AgentProfile.get()`
 
-Retrieve a profile that match the agentProfileData. Send the results to a callback function.
+Retrieves a profile that matches the agentProfileData and sends the results to a callback function.
 
 ```javascript
 // assume myAgentProfile is a previously created profile
@@ -231,7 +231,7 @@ myAgentProfile.get(callbackFn);
 
 `xapi.AgentProfile.getAll()`
 
-Retrieve all agent profiles and that match the agentProfileData. Send the results to a callback function.
+Retrieves all agent profiles that match the agentProfileData and sends the results to a callback function.
 
 ```javascript
 // assume myAgentProfile is a previously created profile
@@ -242,7 +242,7 @@ myAgentProfile.getAll(callbackFn);
 
 `xapi.AgentProfile.update()`
 
-Modifies a profile that match the agentProfileData. Send the results to a callback function.
+Modifies a profile that matches the agentProfileData and sends the results to a callback function.
 
 ```javascript
 // assume myAgentProfile is a previously created profile
@@ -253,7 +253,7 @@ myAgentProfile.update(callbackFn);
 
 `xapi.AgentProfile.post()`
 
-Adds the specified profile to the agent. Send the results to a callback function.
+Adds the specified profile to the agent and sends the results to a callback function.
 
 ```javascript
 // assume myAgentProfile is a previously created profile
@@ -299,16 +299,16 @@ Adds a statement or array of statements to the backlog and syncs with both the b
 myBacklog.add(myStatement);
 
 
-// alternativley, send a batch array of statements to the backlog at once.
-// assume manyStatemens is a collection of previously created xAPI statements
-myBacklog.add(manyStatemens);
+// alternatively, send a batch array of statements to the backlog at once.
+// assume manyStatements is a collection of previously created xAPI statements
+myBacklog.add(manyStatements);
 ```
 
 #### Get Backlog
 
 `xapi.Backlog.get()`
 
-Retrieves the array of xAPI statements in the backlog from localStorage and sessionStroage. Returns the array of backlog items.
+Retrieves the array of xAPI statements in the backlog from localStorage and sessionStorage. Returns the array of backlog items.
 
 ```javascript
 // assume myBacklog is a previously created backlog
@@ -316,7 +316,7 @@ var myBackloggedStatements = myBacklog.get();
 ```
 
 
-#### Syncronize Backlog Storage
+#### Synchronize Backlog Storage
 
 `xapi.Backlog.syncStorage()`
 
@@ -324,11 +324,11 @@ Sets the localStorage and sessionStorage caches contents to the provided collect
 
 ```javascript
 // assume myBacklog is a previously created backlog
-// assume manyStatemens is a collection of previously created xAPI statements
-myBacklog.syncStorage(manyStatemens);
+// assume manyStatements is a collection of previously created xAPI statements
+myBacklog.syncStorage(manyStatements);
 ```
 
-#### Empty Backlog Stroage
+#### Empty Backlog Storage
 
 `xapi.Backlog.empty()`
 
@@ -386,7 +386,7 @@ var myStatement = xapi.State.create(statementData);
 
 `xapi.Statement.store()`
 
-Saves the xAPI statment in the local `backlog` and syncronizes the local `backlog` in the browser's localStorage and sessionStorage.
+Saves the xAPI statment in the local `backlog` and synchronizes the local `backlog` in the browser's localStorage and sessionStorage.
 
 ```javascript
 // assume myStatement is previously created xAPI statement
@@ -418,11 +418,11 @@ var myQuery = xapi.StatementQuery(queryParams);
 
 `xapi.StatementQuery.get()`
 
-Call get to retrieve a the results of the query parameters set in the the Statement Query Object (myQuery).
+Call get to retrieve the results of the query parameters set in the Statement Query Object (myQuery).
 
 ```javascript
-// assume mQuery is a previously created query object
-// get a statement(s) data sent to the callbackFn
+// assume myQuery is a previously created query object
+// get statement data sent to the callbackFn
 myQuery.get(callbackFn);
 ```
 
@@ -433,7 +433,7 @@ myQuery.get(callbackFn);
 Sets up a live query.
 
 ```javascript
-// assume mQuery is a previously created query object
+// assume myQuery is a previously created query object
 // setup live query options
 var options = {
     "update": updateFunction,
@@ -463,7 +463,7 @@ var verbData = {
     "display": display
 };
 
-// then build create the verb from the verbData object
+// then create the verb from the verbData object
 var myVerb = xapi.StatementQuery(verbData);
 
 // alternatively, build a verb from individual peices
