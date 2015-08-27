@@ -464,8 +464,8 @@ var verbData = {
 };
 
 // then create the verb from the verbData object
-var myVerb = xapi.StatementQuery(verbData);
+var myVerb = xapi.Verb.create(verbData);
 
 // alternatively, build a verb from individual peices
-var myVerb = xapi.StatementQuery(id, display);
+var myVerb = xapi.Verb.create(id, display);
 ```
