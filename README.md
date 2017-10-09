@@ -2,10 +2,11 @@
 A javascript xAPI client.
 
 ## Description
-The project contains a comprehensive xAPI javascript client sdk. It was developed to allow applications using javascript the capability to communicate with an LRS. It is currently compatible with xAPI Spec 1.0.2.
+The project contains a comprehensive xAPI javascript client sdk. It was developed to allow applications using javascript the capability to communicate with an LRS. It is currently compatible with xAPI Spec `1.0.2` - `1.0.3`.
 
 ## Features
-* Compatible with xAPI Spec 1.0.2
+* Compatible with xAPI Spec `1.0.2` - `1.0.3`
+* Uses version 4 uuids
 * Client side validation of xAPI statement
 * Queuing of failed requests from network connectivity
 * Standalone script (No third party dependencies)
